@@ -39,6 +39,8 @@ Privacy Redirect allows setting custom instances, instances can be found here:
 - Google Search alternatives:
   - [SearX](https://searx.github.io/searx/)
   - [Whoogle](https://benbusby.com/projects/whoogle-search/)
+- Medium alternatives:
+  - [Scribe](https://sr.ht/~edwardloveall/scribe/)
 
 ## Development
 
