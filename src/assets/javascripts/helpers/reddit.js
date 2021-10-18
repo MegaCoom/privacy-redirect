@@ -7,23 +7,22 @@ const targets = [
   "redd.it",
 ];
 const redirects = [
-  // libreddit: privacy w/ modern UI
-  "https://libredd.it",
-  "https://libreddit.spike.codes",
-  "https://libreddit.kavin.rocks",
-  "https://libreddit.insanity.wtf",
-  "https://libreddit.dothq.co",
-  "https://libreddit.silkky.cloud",
-  "https://libreddit.himiko.cloud",
+// special
   "https://reddit.artemislena.eu",
-  "https://reddit.git-bruh.duckdns.org",
-  // teddit: privacy w/ old UI
+
+// teddit: privacy w/ old UI
   "https://teddit.net",
   "https://teddit.ggc-project.de",
   "https://teddit.kavin.rocks",
-  "https://old.reddit.com", // desktop
-  "https://i.reddit.com", // mobile
-  "https://snew.notabug.io", // anti-censorship
+  "https://teddit.zaggy.nl",
+  "http://teddit4w6cmzmj5kimhfcavs7yo5s7alszvsi2khqutqtlaanpcftfyd.onion",
+  "https://teddit.namazso.eu",
+  "https://teddit.nautolan.racing",
+  "http://ibarajztopxnuhabfu7fg6gbudynxofbnmvis3ltj6lfx47b6fhrd5qd.onion",
+  "https://teddit.pussthecat.org",
+  "https://teddit.alefvanoon.xyz",
+  "https://teddit.sethforprivacy.com",
+  "http://qtpvyiaqhmwccxwzsqubd23xhmmrt75tdyw35kp43w4hvamsgl3x27ad.onion"
 ];
 const bypassPaths = /\/(gallery\/poll\/rpan\/settings\/topics)/;
 

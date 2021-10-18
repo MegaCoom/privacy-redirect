@@ -21,21 +21,20 @@ const redirects = [
   "https://nitter.42l.fr",
   "https://nitter.nixnet.services",
   "https://nitter.pussthecat.org",
-  "https://nitter.dark.fail",
-  "https://nitter.tedomum.net",
-  "https://nitter.cattube.org",
   "https://nitter.fdn.fr",
   "https://nitter.1d4.us",
   "https://nitter.kavin.rocks",
-  "https://tweet.lambda.dance",
-  "https://nitter.cc",
   "https://nitter.vxempire.xyz",
   "https://nitter.unixfox.eu",
   "https://bird.trom.tf",
   "http://3nzoldnxplag42gqjs23xvghtzf6t6yzssrtytnntc6ppc7xxuoneoad.onion",
-  "http://nitter.l4qlywnpwqsluw65ts7md3khrivpirse744un3x7mlskqauz5pyuzgqd.onion",
-  "http://nitterlgj3n5fgwesu3vxc5h67ruku33nqaoeoocae2mvlzhsu6k7fqd.onion",
-  "http://npf37k3mtzwxreiw52ccs5ay4e6qt2fkcs2ndieurdyn2cuzzsfyfvid.onion",
+  "https://nitter.alefvanoon.xyz",
+  "https://nitter.actionsack.com",
+  "https://nitter.namazso.eu",
+  "https://nitter.moomoo.me",
+  "http://nitterrrs6bbcba2bxjviwxzzapkhuuelljtig2ku2rxasweckxxxhid.onion",
+  "http://6wtik35qytedxazoefyol74tb5qnwknxj3plr4czxlywlod5avkxskyd.onion",
+  "https://nitter.silkky.cloud"
 ];
 
 export default {
