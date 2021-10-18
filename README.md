@@ -36,16 +36,8 @@ Privacy Redirect allows setting custom instances, instances can be found here:
 - Reddit alternatives:
   - [Libreddit](https://github.com/spikecodes/libreddit#instances)
   - [Teddit](https://codeberg.org/teddit/teddit#instances)
-  - [Snew](https://github.com/snew/snew)
-  - [Old Reddit](https://old.reddit.com) & [Mobile Reddit](https://i.reddit.com), purported to be more privacy respecting than the new UI.
 - Google Search alternatives:
   - [SearX](https://searx.github.io/searx/)
-  - [DuckDuckGo](https://duckduckgo.com)
-  - [Startpage](https://startpage.com)
-  - [Ecosia](https://www.ecosia.org)
-  - [Qwant](https://www.qwant.com)
-  - [Mojeek](https://www.mojeek.com)
-  - [Presearch](https://www.presearch.org)
   - [Whoogle](https://benbusby.com/projects/whoogle-search/)
 
 ## Development
