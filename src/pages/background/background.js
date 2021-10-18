@@ -5,6 +5,7 @@ import twitterHelper from "../../assets/javascripts/helpers/twitter.js";
 import youtubeHelper from "../../assets/javascripts/helpers/youtube.js";
 import instagramHelper from "../../assets/javascripts/helpers/instagram.js";
 import mapsHelper from "../../assets/javascripts/helpers/google-maps.js";
+import mediumHelper from "../../assets/javascripts/helpers/medium.js";
 import redditHelper from "../../assets/javascripts/helpers/reddit.js";
 import searchHelper from "../../assets/javascripts/helpers/google-search.js";
 import googleTranslateHelper from "../../assets/javascripts/helpers/google-translate.js";
@@ -13,6 +14,9 @@ import wikipediaHelper from "../../assets/javascripts/helpers/wikipedia.js";
 const nitterInstances = twitterHelper.redirects;
 const twitterDomains = twitterHelper.targets;
 const youtubeDomains = youtubeHelper.targets;
+const mediumDomains = mediumHelper.targets;
+const scribeInstances = mediumHelper.redirects;
+const scribeDefault = mediumHelper.redirects[0];
 const invidiousInstances = youtubeHelper.redirects;
 const instagramDomains = instagramHelper.targets;
 const bibliogramInstances = instagramHelper.redirects;
@@ -43,6 +47,7 @@ let disableInvidious;
 let disableBibliogram;
 let disableOsm;
 let disableReddit;
+let disableScribe;
 let disableSearchEngine;
 let disableSimplyTranslate;
 let disableWikipedia;
@@ -50,6 +55,7 @@ let nitterInstance;
 let invidiousInstance;
 let bibliogramInstance;
 let osmInstance;
+let scribeInstance;
 let redditInstance;
 let searchEngineInstance;
 let simplyTranslateInstance;
@@ -66,6 +72,7 @@ let useFreeTube;
 let nitterRandomPool;
 let invidiousRandomPool;
 let bibliogramRandomPool;
+let scribeRandomPool;
 let exceptions;
 
 window.browser = window.browser || window.chrome;
@@ -77,6 +84,7 @@ browser.storage.sync.get(
     "bibliogramInstance",
     "osmInstance",
     "redditInstance",
+    "scribeInstance",
     "searchEngineInstance",
     "simplyTranslateInstance",
     "wikipediaInstance",
@@ -85,6 +93,7 @@ browser.storage.sync.get(
     "disableBibliogram",
     "disableOsm",
     "disableReddit",
+    "disableScribe",
     "disableSearchEngine",
     "disableSimplyTranslate",
     "disableWikipedia",
@@ -100,6 +109,7 @@ browser.storage.sync.get(
     "nitterRandomPool",
     "invidiousRandomPool",
     "bibliogramRandomPool",
+    "scribeRandomPool",
     "exceptions",
   ],
   (result) => {
@@ -108,6 +118,7 @@ browser.storage.sync.get(
     bibliogramInstance = result.bibliogramInstance;
     osmInstance = result.osmInstance || osmDefault;
     redditInstance = result.redditInstance || redditDefault;
+    scribeInstance = result.scribeInstance || scribeDefault;
     searchEngineInstance = result.searchEngineInstance;
     simplyTranslateInstance =
       result.simplyTranslateInstance || simplyTranslateDefault;
@@ -143,6 +154,9 @@ browser.storage.sync.get(
     bibliogramRandomPool = result.bibliogramRandomPool
       ? result.bibliogramRandomPool.split(",")
       : commonHelper.filterInstances(bibliogramInstances);
+    scribeRandomPool = result.scribeRandomPool
+      ? result.scribeRandomPool.split(",")
+      : commonHelper.filterInstances(scribeInstances);
   }
 );
 
@@ -168,6 +182,9 @@ browser.storage.onChanged.addListener((changes) => {
   }
   if ("redditInstance" in changes) {
     redditInstance = changes.redditInstance.newValue || redditDefault;
+  }
+  if ("scribeInstance" in changes) {
+    scribeInstance = changes.scribeInstance.newValue || scribeDefault;
   }
   if ("searchEngineInstance" in changes) {
     searchEngineInstance = changes.searchEngineInstance.newValue;
@@ -231,6 +248,9 @@ browser.storage.onChanged.addListener((changes) => {
   }
   if ("bibliogramRandomPool" in changes) {
     bibliogramRandomPool = changes.bibliogramRandomPool.newValue.split(",");
+  }
+  if ("scribeRandomPool" in changes) {
+    scribeRandomPool = changes.scribeRandomPool.newValue.split(",");
   }
   if ("exceptions" in changes) {
     exceptions = changes.exceptions.newValue.map((e) => {
@@ -515,6 +535,40 @@ function redirectReddit(url, initiator, type) {
   return `${redditInstance}${url.pathname}${url.search}`;
 }
 
+function redirectMedium(url, initiator) {
+  if (disableScribe || isException(url, initiator)) {
+    return null;
+  }
+  if (url.pathname.split("/").includes("home")) {
+    return null;
+  }
+  if (
+    isFirefox() &&
+    initiator &&
+    (initiator.origin === scribeInstance ||
+      scribeInstances.includes(initiator.origin) ||
+      mediumDomains.includes(initiator.host))
+  ) {
+    browser.storage.sync.set({
+      redirectBypassFlag: true,
+    });
+    return null;
+  }
+  if (url.host.split(".")[0] === "pbs" || url.host.split(".")[0] === "video") {
+    return `${
+      scribeInstance || commonHelper.getRandomInstance(scribeRandomPool)
+    }/pic/${encodeURIComponent(url.href)}`;
+  } else if (url.pathname.split("/").includes("tweets")) {
+    return `${
+      scribeInstance || commonHelper.getRandomInstance(scribeRandomPool)
+    }${url.pathname.replace("/tweets", "")}${url.search}`;
+  } else {
+    return `${
+      scribeInstance || commonHelper.getRandomInstance(scribeRandomPool)
+    }${url.pathname}${url.search}`;
+  }
+}
+
 function redirectSearchEngine(url, initiator) {
   if (disableSearchEngine || isException(url, initiator)) {
     return null;
@@ -606,6 +660,10 @@ browser.webRequest.onBeforeRequest.addListener(
     } else if (redditDomains.includes(url.host)) {
       redirect = {
         redirectUrl: redirectReddit(url, initiator, details.type),
+      };
+    } else if (mediumDomains.includes(url.host)) {
+      redirect = {
+        redirectUrl: redirectMedium(url, initiator, details.type),
       };
     } else if (url.href.match(googleSearchRegex)) {
       redirect = {
