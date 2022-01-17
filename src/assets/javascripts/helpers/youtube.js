@@ -15,7 +15,8 @@ const targets = [
     when updating this list:
   */
 const redirects = [
-  "https://invidious.12ad.de",
+  "https://yt.artemislena.eu",
+  "https://invidious.sethforprivacy.com",
   "https://invidious.kavin.rocks",
   "https://invidious.snopyta.org"
 ];

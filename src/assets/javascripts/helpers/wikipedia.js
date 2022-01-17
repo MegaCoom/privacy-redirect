@@ -1,6 +1,7 @@
 const targets = /wikipedia.org/;
 
 const redirects = [
+  "https://wikiless.sethforprivacy.com",
   "https://wikipedia.org",
   "https://wikiless.org",
   "https://wikiless.alefvanoon.xyz",

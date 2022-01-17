@@ -5,8 +5,8 @@ const targets = [
   "about.instagram.com",
 ];
 const redirects = [
-  "https://bibliogram.art",
-  "https://bibliogram.snopyta.org",
+  "https://bibliogram.1d4.us",
+  "https://bibliogram.fdn.fr",
   "https://bibliogram.pussthecat.org",
   "https://bibliogram.ethibox.fr",
   "https://bibliogram.hamster.dance",

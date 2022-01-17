@@ -17,7 +17,6 @@ const redirects = [
   "https://teddit.zaggy.nl",
   "http://teddit4w6cmzmj5kimhfcavs7yo5s7alszvsi2khqutqtlaanpcftfyd.onion",
   "https://teddit.namazso.eu",
-  "https://teddit.nautolan.racing",
   "http://ibarajztopxnuhabfu7fg6gbudynxofbnmvis3ltj6lfx47b6fhrd5qd.onion",
   "https://teddit.pussthecat.org",
   "https://teddit.alefvanoon.xyz",
